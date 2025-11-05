@@ -1,35 +1,52 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import './styles/theme.css';
+import './styles/global.css';
 
-function App() {
-  const [count, setCount] = useState(0)
+import { Container } from './componnents/Container';
+import { Logo } from './componnents/Logo';
+import { Menu } from './componnents/Menu';
+import { CountDown } from './componnents/CountDown';
+import { DefaultInput } from './componnents/DefaultInput';
+import { Cycles } from './componnents/Cycles';
+import { DefaultButton } from './componnents/DefaultButton';
+import { Footer } from './componnents/Footer';
+import { PlayCircleIcon } from 'lucide-react';
 
+export function App() {
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Container>
+        <Logo />
+      </Container>
+      <Container>
+        <Menu />
+      </Container>
+      <Container>
+        <CountDown />
+      </Container>
+      <Container>
+        <form className='form' action=''>
+          <div className='formRown'>
+            <DefaultInput
+              id='meuInput'
+              type='text'
+              labeltext='task'
+              placeholder='Digite algo'
+            />
+          </div>
+          <div className='formRown'>
+            <p>Lorem ipsum dolor sit amet.</p>
+          </div>
+          <div className='formRown'>
+            <Cycles />
+          </div>
+          <div className='formRown'>
+            <DefaultButton icon={<PlayCircleIcon />} color='green' />
+          </div>
+        </form>
+      </Container>
+      <Container>
+        <Footer />
+      </Container>
     </>
-  )
+  );
 }
-
-export default App

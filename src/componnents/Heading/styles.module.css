@@ -1,0 +1,5 @@
+.heading {
+  display: flex; /*estilização de layout felxível*/
+  justify-content: center; /*alinha horizontalmente ao centro*/
+  gap: 2.4rem; /*espaçamento entre os itens de 24px*/
+}

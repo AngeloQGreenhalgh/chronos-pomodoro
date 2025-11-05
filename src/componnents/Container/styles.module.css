@@ -1,0 +1,15 @@
+/*Estilização do background (estica a tela inteira*/
+.container-fluid {
+  max-width: auto;
+}
+
+/*Estilização para limitar a largura da página e limitar o conteúdo ao centro*/
+.container {
+  max-width: 98rem; /*980px*/
+  margin: 0 auto;
+}
+
+/*Estilização do conteúdo*/
+.content {
+  margin: 3.2rem; /*32px*/
+}
