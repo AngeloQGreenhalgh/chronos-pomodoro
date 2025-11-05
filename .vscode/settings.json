@@ -10,6 +10,7 @@
   "files.eol": "\n", // Final de linha sempre será LF
   "workbench.editor.labelFormat": "short", // Formato curto para nomes de abas
   "editor.tabSize": 2, // Tamanho da tabulação
+  "explorer.compactFolders": false, // Mostrar todas as pastas na árvore de arquivos
 
   // 🛠 Formatação e Lint
   "editor.defaultFormatter": "esbenp.prettier-vscode",
