@@ -1,4 +1,4 @@
-import { PlayCircleIcon } from 'lucide-react';
+import { PlayCircleIcon, StopCircleIcon } from 'lucide-react';
 import { Cycles } from '../Cycles';
 import { DefaultButton } from '../DefaultButton';
 import { DefaultInput } from '../DefaultInput';
@@ -60,6 +60,31 @@ export function MainForm() {
       };
     });
   }
+
+  function handleInterruptTask() {
+    setState(prevState => {
+      return {
+        ...prevState,
+        activeTask: null,
+        secondsRemaing: 0,
+        formatedSecondsRemaining: '00:00',
+        /* Atualiza a tarefa interrompida na lista de tarefas percorrendo as tasks 
+           através de Map (Loop), localizando a task ativa e a task que tem o mesmo 
+           ID da Task ativa, caso encontrada, altera o parametro 'interruptedDate' 
+           registrando o time stamp a data atual*/
+        tasks: prevState.tasks.map(task => {
+          if (prevState.activeTask && prevState.activeTask?.id === task.id) {
+            return {
+              ...task,
+              interruptedDate: Date.now(),
+            };
+          }
+          return task;
+        }),
+      };
+    });
+  }
+
   return (
     <form onSubmit={handleCreateNewTask} className='form' action=''>
       <div className='formRown'>
@@ -69,6 +94,7 @@ export function MainForm() {
           labeltext='task'
           placeholder='Digite algo'
           ref={taskNameInput}
+          disabled={!!state.activeTask}
         />
       </div>
       <div className='formRown'>
@@ -81,7 +107,27 @@ export function MainForm() {
         </div>
       )}
       <div className='formRown'>
-        <DefaultButton icon={<PlayCircleIcon />} color='green' />
+        {!state.activeTask && (
+          <DefaultButton
+            aria-label='Iniciar nova tarefa'
+            title='Iniciar nova tarefa'
+            type='submit'
+            icon={<PlayCircleIcon />}
+            color='green'
+            key='Criar uma nova tarefa'
+          />
+        )}
+        {!!state.activeTask && (
+          <DefaultButton
+            aria-label='Interromper tarefa atual'
+            title='Interromper tarefa atual'
+            type='button'
+            icon={<StopCircleIcon />}
+            color='red'
+            onClick={handleInterruptTask}
+            key='Interromper tarefa atual'
+          />
+        )}
       </div>
     </form>
   );
