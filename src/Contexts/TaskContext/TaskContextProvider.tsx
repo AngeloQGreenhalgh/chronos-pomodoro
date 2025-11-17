@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { initialTaskState } from './InitialTaskState';
+import { initialTaskState } from './initialTaskState';
 import { TaskContext } from './TaskContext';
 
 // Tipo do provedor do contexto
