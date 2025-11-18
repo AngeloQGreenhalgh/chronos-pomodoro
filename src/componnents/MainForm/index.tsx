@@ -7,10 +7,11 @@ import type { TaskModel } from '../../models/TaskModel';
 import { useTaskContext } from '../../Contexts/TaskContext/useTaskContext';
 import { getNextCycle } from '../../utils/getNextCycle';
 import { getNextCycleType } from '../../utils/getNextCycleType';
-import { formatSecondsToMinutes } from '../../utils/formatSecondsToMinutes';
+import { TaskActionTypes } from '../../Contexts/TaskContext/taskActions';
+//import { formatSecondsToMinutes } from '../../utils/formatSecondsToMinutes';
 
 export function MainForm() {
-  const { state, setState } = useTaskContext();
+  const { state, dispatch } = useTaskContext();
   const taskNameInput = useRef<HTMLInputElement>(null);
 
   // Calcula o próximo ciclo com base no ciclo atual
@@ -44,45 +45,11 @@ export function MainForm() {
       type: nextCycleType,
     };
 
-    // Calcula os segundos restantes com base na duração da tarefa
-    const secondsRemaing = newTask.duration * 60;
-
-    // Atualiza o estado global com a nova tarefa e outros valores relacionados
-    setState(prevState => {
-      return {
-        ...prevState,
-        config: { ...prevState.config },
-        activeTask: newTask,
-        currentCycle: nextCycle,
-        secondsRemaing,
-        formatedSecondsRemaining: formatSecondsToMinutes(secondsRemaing),
-        tasks: [...prevState.tasks, newTask],
-      };
-    });
+    dispatch({ type: TaskActionTypes.START_TASK, payload: newTask });
   }
 
   function handleInterruptTask() {
-    setState(prevState => {
-      return {
-        ...prevState,
-        activeTask: null,
-        secondsRemaing: 0,
-        formatedSecondsRemaining: '00:00',
-        /* Atualiza a tarefa interrompida na lista de tarefas percorrendo as tasks 
-           através de Map (Loop), localizando a task ativa e a task que tem o mesmo 
-           ID da Task ativa, caso encontrada, altera o parametro 'interruptedDate' 
-           registrando o time stamp a data atual*/
-        tasks: prevState.tasks.map(task => {
-          if (prevState.activeTask && prevState.activeTask?.id === task.id) {
-            return {
-              ...task,
-              interruptedDate: Date.now(),
-            };
-          }
-          return task;
-        }),
-      };
-    });
+    dispatch({ type: TaskActionTypes.INTERRUPT_TASK });
   }
 
   return (
