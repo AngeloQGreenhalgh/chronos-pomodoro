@@ -8,6 +8,7 @@ import { useTaskContext } from '../../Contexts/TaskContext/useTaskContext';
 import { getNextCycle } from '../../utils/getNextCycle';
 import { getNextCycleType } from '../../utils/getNextCycleType';
 import { TaskActionTypes } from '../../Contexts/TaskContext/taskActions';
+import { Tips } from '../Tips';
 //import { formatSecondsToMinutes } from '../../utils/formatSecondsToMinutes';
 
 export function MainForm() {
@@ -65,7 +66,7 @@ export function MainForm() {
         />
       </div>
       <div className='formRown'>
-        <p>Nesse ciclo foque por 25 min.</p>
+        <Tips />
       </div>
       {/*Controla a reenderização de um elemtno na tela */}
       {state.currentCycle > 0 && (
