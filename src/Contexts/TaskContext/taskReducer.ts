@@ -15,14 +15,14 @@ export function taskReducer(
       const nextCycle = getNextCycle(state.currentCycle);
 
       // Calcula os segundos restantes com base na duração da tarefa
-      const secondsRemaing = newTask.duration * 60;
+      const secondsRemaining = newTask.duration * 60;
 
       return {
         ...state,
         activeTask: newTask,
         currentCycle: nextCycle,
-        secondsRemaing,
-        formatedSecondsRemaining: formatSecondsToMinutes(secondsRemaing),
+        secondsRemaining,
+        formatedSecondsRemaining: formatSecondsToMinutes(secondsRemaining),
         tasks: [...state.tasks, newTask],
       };
     }
@@ -31,7 +31,7 @@ export function taskReducer(
       return {
         ...state,
         activeTask: null,
-        secondsRemaing: 0,
+        secondsRemaining: 0,
         formatedSecondsRemaining: '00:00',
         //  Atualiza a tarefa interrompida na lista de tarefas percorrendo as tasks
         //  através de Map (Loop), localizando a task ativa e a task que tem o mesmo
@@ -53,7 +53,7 @@ export function taskReducer(
       return {
         ...state,
         activeTask: null,
-        secondsRemaing: 0,
+        secondsRemaining: 0,
         formatedSecondsRemaining: '00:00',
         tasks: state.tasks.map(task => {
           if (state.activeTask && state.activeTask?.id === task.id) {
@@ -74,7 +74,7 @@ export function taskReducer(
     case TaskActionTypes.COUNT_DOWN: {
       return {
         ...state,
-        secondsRemaing: action.payload.secondsRemaining,
+        secondsRemaining: action.payload.secondsRemaining,
         formatedSecondsRemaining: formatSecondsToMinutes(
           action.payload.secondsRemaining)
       };

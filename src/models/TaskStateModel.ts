@@ -2,7 +2,7 @@ import type { TaskModel } from './TaskModel';
 
 export type TaskStateModel = {
   tasks: TaskModel[];
-  secondsRemaing: number;
+  secondsRemaining: number;
   formatedSecondsRemaining: string;
   activeTask: TaskModel | null;
   currentCycle: number; // 1 à 8

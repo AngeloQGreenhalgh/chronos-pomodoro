@@ -1,15 +1,15 @@
-let isRunnung = false;
+let isRunning = false;
 
 // Evento de monitoramento de ações de recebimento de mensagens pelo Web Worker
 // ou seja, monitora eem backgound qualquer ação disparada no frontend
 self.onmessage = function (event) {
-  if(isRunnung) return;
+  if(isRunning) return;
 
-  isRunnung = true;
+  isRunning = true;
 
   const state = event.data;
-  const {activeTask , secondsRemaing} = state;
-  const endDate = activeTask.startDate + secondsRemaing * 1000;
+  const {activeTask , secondsRemaining} = state;
+  const endDate = activeTask.startDate + secondsRemaining * 1000;
   const now = Date.now();
 
   let countDownSeconds = Math.ceil((endDate - now) / 1000);

@@ -3,7 +3,7 @@ import type { TaskStateModel } from '../../models/TaskStateModel';
 // Estado inicial do contexto
 export const initialTaskState: TaskStateModel = {
   tasks: [],
-  secondsRemaing: 0,
+  secondsRemaining: 0,
   formatedSecondsRemaining: '00:00',
   activeTask: null,
   currentCycle: 0,
