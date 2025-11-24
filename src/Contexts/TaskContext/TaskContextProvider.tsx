@@ -15,6 +15,12 @@ type TaskContextProviderProps = {
 export function TaskContextProvider({ children }: TaskContextProviderProps) {
   // Monitoramento do estado do aplicativo
   const [state, dispatch] = useReducer(taskReducer, initialTaskState);
+
+  // useRef é utilizado aqui para manter uma referência estável à função que toca o beep,
+  // sem que ela seja recriada a cada renderização. Isso é importante porque:
+  // - Queremos garantir que a função de tocar o áudio persista entre renders.
+  // - Precisamos acessar e modificar essa referência dentro de callbacks assíncronos (ex: worker.onmessage).
+  // - O valor de playBeepRef.current pode ser atualizado sem disparar uma nova renderização do componente.
   const playBeepRef = useRef<ReturnType<typeof loadBeep> | null>(null);
   const worker = TimerWorkerManager.getInstance();
 
@@ -22,6 +28,8 @@ export function TaskContextProvider({ children }: TaskContextProviderProps) {
     const countDownSeconds = e.data;
 
     if (countDownSeconds <= 0) {
+      // Aqui usamos playBeepRef.current para tocar o beep quando o tempo acaba.
+      // Após tocar, limpamos a referência para evitar múltiplas execuções.
       if (playBeepRef.current) {
         playBeepRef.current();
         playBeepRef.current = null;
@@ -48,6 +56,8 @@ export function TaskContextProvider({ children }: TaskContextProviderProps) {
   }, [worker, state]);
 
   useEffect(() => {
+    // Quando uma nova tarefa é ativada, inicializamos playBeepRef com a função de beep.
+    // Se não houver tarefa ativa, limpamos a referência.
     if (state.activeTask && playBeepRef.current === null) {
       playBeepRef.current = loadBeep();
     } else {
