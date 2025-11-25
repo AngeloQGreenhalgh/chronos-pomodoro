@@ -15,6 +15,9 @@ export function MainForm() {
   const { state, dispatch } = useTaskContext();
   const taskNameInput = useRef<HTMLInputElement>(null);
 
+  // Exibição da última tarefa registrada
+  const lastTaskName = state.tasks[state.tasks.length - 1]?.name || '';
+
   // Calcula o próximo ciclo com base no ciclo atual
   const nextCycle = getNextCycle(state.currentCycle);
 
@@ -66,6 +69,7 @@ export function MainForm() {
           placeholder='Digite algo'
           ref={taskNameInput}
           disabled={!!state.activeTask}
+          defaultValue={lastTaskName}
         />
       </div>
       <div className='formRown'>
