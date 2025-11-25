@@ -1,7 +1,7 @@
-import { Container } from '../../componnents/Container';
-import { GenericHtml } from '../../componnents/GenericHtml';
-import { Heading } from '../../componnents/Heading';
-import { RouterLink } from '../../componnents/RouterLink';
+import { Container } from '../../components/Container';
+import { GenericHtml } from '../../components/GenericHtml';
+import { Heading } from '../../components/Heading';
+import { RouterLink } from '../../components/RouterLink';
 import { MainTemplate } from '../../templates/MainTemplates';
 
 export function NotFound() {

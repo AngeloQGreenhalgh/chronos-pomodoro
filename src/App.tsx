@@ -1,6 +1,6 @@
 import { TaskContextProvider } from './Contexts/TaskContext/TaskContextProvider';
-import { MessagesContainer } from './componnents/MessagesContainer';
 import { MainRouter } from './routers/MainRouter';
+import { MessagesContainer } from './components/MessagesContainer';
 
 import './styles/theme.css';
 import './styles/global.css';

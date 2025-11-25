@@ -1,6 +1,6 @@
-import { Container } from '../../componnents/Container';
-import { CountDown } from '../../componnents/CountDown';
-import { MainForm } from '../../componnents/MainForm';
+import { Container } from '../../components/Container';
+import { CountDown } from '../../components/CountDown';
+import { MainForm } from '../../components/MainForm';
 import { MainTemplate } from '../../templates/MainTemplates';
 
 export function Home() {

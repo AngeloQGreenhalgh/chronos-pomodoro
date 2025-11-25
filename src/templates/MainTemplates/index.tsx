@@ -1,7 +1,7 @@
-import { Container } from '../../componnents/Container';
-import { Logo } from '../../componnents/Logo';
-import { Menu } from '../../componnents/Menu';
-import { Footer } from '../../componnents/Footer';
+import { Container } from '../../components/Container';
+import { Footer } from '../../components/Footer';
+import { Logo } from '../../components/Logo';
+import { Menu } from '../../components/Menu';
 
 type MainTemplateProps = {
   children: React.ReactNode;
