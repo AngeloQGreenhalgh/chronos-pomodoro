@@ -5,6 +5,7 @@ import { taskReducer } from './taskReducer';
 import { TimerWorkerManager } from '../../workers/TimerWorkerManager';
 import { TaskActionTypes } from './taskActions';
 import { loadBeep } from '../../utils/loadBeep';
+import { TaskStateModel } from '../../models/TaskStateModel';
 
 // Tipo do provedor do contexto
 type TaskContextProviderProps = {
@@ -14,7 +15,21 @@ type TaskContextProviderProps = {
 // Componente provedor do contexto
 export function TaskContextProvider({ children }: TaskContextProviderProps) {
   // Monitoramento do estado do aplicativo
-  const [state, dispatch] = useReducer(taskReducer, initialTaskState);
+  const [state, dispatch] = useReducer(taskReducer, initialTaskState, () => {
+    // Recuperando o registro da task registrada no localstorage e zerando a task
+    const storageState = localStorage.getItem('state');
+
+    if (storageState === null) return initialTaskState;
+
+    const parsedStorageState = JSON.parse(storageState) as TaskStateModel;
+
+    return {
+      ...parsedStorageState,
+      activeTask: null,
+      secondsRemaining: 0,
+      formatedSecondsRemaining: '00:00',
+    };
+  });
 
   // useRef é utilizado aqui para manter uma referência estável à função que toca o beep,
   // sem que ela seja recriada a cada renderização. Isso é importante porque:
@@ -49,6 +64,9 @@ export function TaskContextProvider({ children }: TaskContextProviderProps) {
 
   // Monitora o alteração de um valor de uma variável de estado
   useEffect(() => {
+    // Registro do estado atual no localstorage
+    localStorage.setItem('state', JSON.stringify(state));
+
     if (!state.activeTask) {
       worker.terminate();
     }

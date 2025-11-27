@@ -4,7 +4,6 @@ export function MainForm() {
   const setName = useRef<HTMLInputElement>(null);
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    console.log('Formulário enviado');
   }
   return (
     <form onSubmit={handleSubmit} action=''>
