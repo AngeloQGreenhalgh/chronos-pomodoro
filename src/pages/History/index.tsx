@@ -14,6 +14,7 @@ import { showMessage } from '../../adapters/showMessage';
 import { TaskActionTypes } from '../../Contexts/TaskContext/taskActions';
 
 import styles from './styles.module.css';
+import { getTypeTask } from '../../utils/getTypeTask';
 
 export function History() {
   const { state, dispatch } = useTaskContext();
@@ -130,19 +131,13 @@ export function History() {
               </thead>
               <tbody>
                 {sortTaskOptions.tasks.map(task => {
-                  const taskTypeDictionary = {
-                    workTime: 'Foco',
-                    shortBreakTime: 'Descanso curto',
-                    longBreakTime: 'Descanso Longo',
-                  };
-
                   return (
                     <tr key={task.id}>
                       <td>{task.name}</td>
                       <td>{task.duration} min</td>
                       <td>{formatDate(parseInt(task.id))}</td>
                       <td>{getTaskStatus(task, state.activeTask)}</td>
-                      <td>{taskTypeDictionary[task.type]}</td>
+                      <td>{getTypeTask(task.type)}</td>
                     </tr>
                   );
                 })}
