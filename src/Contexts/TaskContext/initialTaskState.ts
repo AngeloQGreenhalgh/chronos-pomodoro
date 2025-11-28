@@ -10,6 +10,6 @@ export const initialTaskState: TaskStateModel = {
   config: {
     workTime: 25,
     shortBreakTime: 5,
-    longBreakTime: 25,
+    longBreakTime: 15,
   },
 };

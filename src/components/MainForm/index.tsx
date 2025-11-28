@@ -61,7 +61,7 @@ export function MainForm() {
 
   return (
     <form onSubmit={handleCreateNewTask} className='form' action=''>
-      <div className='formRown'>
+      <div className='formRow'>
         <DefaultInput
           id='meuInput'
           type='text'
@@ -72,16 +72,16 @@ export function MainForm() {
           defaultValue={lastTaskName}
         />
       </div>
-      <div className='formRown'>
+      <div className='formRow'>
         <Tips />
       </div>
       {/*Controla a reenderização de um elemtno na tela */}
       {state.currentCycle > 0 && (
-        <div className='formRown'>
+        <div className='formRow'>
           <Cycles />
         </div>
       )}
-      <div className='formRown'>
+      <div className='formRow'>
         {!state.activeTask && (
           <DefaultButton
             aria-label='Iniciar nova tarefa'
