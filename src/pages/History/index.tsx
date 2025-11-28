@@ -21,6 +21,10 @@ export function History() {
   const [confirmCLearHistory, setConfirmClearHistory] = useState(false);
   const hasTasks = state.tasks.length > 0;
 
+  useEffect(() => {
+    document.title = 'Histórico - Chronos Pomodoro';
+  }, []);
+
   // Inicialização orquestrada para ordenação dinâmica de dados
   const [sortTaskOptions, setSortTaskOptions] = useState<SortTasksOptions>(
     () => {
