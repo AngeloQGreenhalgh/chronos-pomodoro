@@ -72,7 +72,7 @@ export function TaskContextProvider({ children }: TaskContextProviderProps) {
     }
 
     // Exibição do contador da tarefa na barra de título da janela
-    document.title = `${state.formatedSecondsRemaining} - Chronos Pomodoros`;
+    document.title = `${state.formatedSecondsRemaining} - Chronos Pomodoro`;
 
     worker.postMessage(state);
   }, [worker, state]);
